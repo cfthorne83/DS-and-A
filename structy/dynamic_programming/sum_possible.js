@@ -36,8 +36,9 @@
 const sumPossible = (amount, numbers) => {
 
     for (let num of numbers){
-        num.buildTree(num, numbers, amount)
+        if (num.buildTree(num, numbers, amount)) return true;
     }
+    return false;
 };
 
 const buildTree = (root, numbers, amount) => {
@@ -53,8 +54,8 @@ const buildTree = (root, numbers, amount) => {
     return false;
 };
 
-console.log(buildTree(4,[5, 12, 4], 8 ))
-// console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
+// console.log(buildTree(4,[5, 12, 4], 8 ))
+console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
 
 
 
