@@ -33,14 +33,6 @@
 // }
 
 ///////////////////////////////////////////////////////////
-
-class Node {
-    constructor(val){
-        this.val = val;
-    }
-}
-
-
 const sumPossible = (amount, numbers) => {
 
     for (let num of numbers){
@@ -50,17 +42,19 @@ const sumPossible = (amount, numbers) => {
 
 const buildTree = (root, numbers, amount) => {
     if ((amount - root) === 0) return true;
-    if ((amount - root) > 0) return false;
+    if ((amount - root) < 0) return false;
 
     let newAmount = amount - root;
-
     for (let num of numbers) {
+        // console.log([num, numbers, newAmount])
         if (buildTree(num, numbers, newAmount) === true) return true;
     }
 
     return false;
 };
 
+console.log(buildTree(4,[5, 12, 4], 8 ))
+// console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
 
 
 
@@ -70,6 +64,3 @@ const buildTree = (root, numbers, amount) => {
 
 
 
-
-// console.log(buildTree(12, 8, [5, 12, 4] ))
-console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
