@@ -42,17 +42,20 @@ const sumPossible = (amount, numbers) => {
             if (buildTree(num, numbers, amount, memo)) return true;
             // console.log(memo)
         }
+        // console.log(memo)
     return false;
 };
 
 const buildTree = (root, numbers, amount, memo) => {
-    if (root in memo) return memo[root];
+    // console.log([root, numbers, amount, memo]);
+    if (memo[root] === true || memo[root] === false) return memo[root];
     if ((amount - root) === 0){
         memo[root] = true;
         return memo[root];
     } 
     if ((amount - root) < 0){
         memo[root] = false;
+        console.log(`${memo[root]}, amount - root < 0`)
         return memo[root];
     }
     
@@ -67,8 +70,8 @@ const buildTree = (root, numbers, amount, memo) => {
     return memo[root];
 };
 
-console.log(buildTree(4,[5, 12, 4], 8 , {}))
-// console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
+// console.log(buildTree(4,[4, 5, 12], 8 , {}))
+console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
 
 
 
