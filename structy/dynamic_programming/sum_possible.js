@@ -34,28 +34,44 @@
 
 ///////////////////////////////////////////////////////////
 const sumPossible = (amount, numbers) => {
+    if (amount === 0 && numbers.length === 0) return true;
+    let memo = {};
 
     for (let num of numbers){
-        if (num.buildTree(num, numbers, amount)) return true;
-    }
+        // console.log(memo);
+            if (buildTree(num, numbers, amount, memo)) return true;
+            // console.log(memo)
+        }
     return false;
 };
 
-const buildTree = (root, numbers, amount) => {
-    if ((amount - root) === 0) return true;
-    if ((amount - root) < 0) return false;
-
+const buildTree = (root, numbers, amount, memo) => {
+    if (root in memo) return memo[root];
+    if ((amount - root) === 0){
+        memo[root] = true;
+        return;
+    } 
+    if ((amount - root) < 0){
+        memo[root] = false;
+        return;
+    }
+    
     let newAmount = amount - root;
     for (let num of numbers) {
-        // console.log([num, numbers, newAmount])
-        if (buildTree(num, numbers, newAmount) === true) return true;
+        console.log([num, memo]);
+        if (buildTree(num, numbers, newAmount, memo) === true){
+            // memo[num] = true;
+            memo[root] = true;
+            return true;
+        }
     }
-
-    return false;
+    memo[root] = false;
+    console.log(memo);
+    return memo[root];
 };
 
-// console.log(buildTree(4,[5, 12, 4], 8 ))
-console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
+console.log(buildTree(4,[5, 12, 4], 8 , {}))
+// console.log(sumPossible(8, [5, 12, 4])); // -> true, 4 + 4
 
 
 
