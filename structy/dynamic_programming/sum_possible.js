@@ -49,24 +49,21 @@ const buildTree = (root, numbers, amount, memo) => {
     if (root in memo) return memo[root];
     if ((amount - root) === 0){
         memo[root] = true;
-        return;
+        return memo[root];
     } 
     if ((amount - root) < 0){
         memo[root] = false;
-        return;
+        return memo[root];
     }
     
     let newAmount = amount - root;
     for (let num of numbers) {
-        console.log([num, memo]);
         if (buildTree(num, numbers, newAmount, memo) === true){
-            // memo[num] = true;
             memo[root] = true;
-            return true;
+            return memo[root];
         }
     }
     memo[root] = false;
-    console.log(memo);
     return memo[root];
 };
 
