@@ -12,7 +12,7 @@ const minChange = (amount, coins, min=Infinity) => {
        let count = 1 + minChange(amount - coin, coins, min);
        if ( count < min && count > 0) min = count;
    }
-   return min;
+   return min === Infinity ? -1 : min;
 };
 
 console.log(minChange(8, [1, 5, 4, 12])); // -> 2, because 4+4 is the minimum coins possible
