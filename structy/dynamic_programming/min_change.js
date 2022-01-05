@@ -4,9 +4,15 @@
 
 // If it is not possible to create the amount, then return -1.
 
-const minChange = (amount, coins) => {
-    if ( amount === 0 ) return true;
-    
+const minChange = (amount, coins, min=Infinity) => {
+   if ( amount === 0 ) return 0;
+   if ( amount < 0 ) return -1;
+
+   for (let coin of coins){
+       let count = 1 + minChange(amount - coin, coins, min);
+       if ( count < min && count > 0) min = count;
+   }
+   return min;
 };
 
-// minChange(8, [1, 5, 4, 12]); // -> 2, because 4+4 is the minimum coins possible
+console.log(minChange(8, [1, 5, 4, 12])); // -> 2, because 4+4 is the minimum coins possible
