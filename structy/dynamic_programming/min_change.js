@@ -4,7 +4,8 @@
 
 // If it is not possible to create the amount, then return -1.
 
-const minChange = (amount, coins, min=Infinity) => {
+const minChange = (amount, coins, min=Infinity, memo={}) => {
+   if ( amount in memo ) return memo[amount];
    if ( amount === 0 ) return 0;
    if ( amount < 0 ) return -1;
 
@@ -12,6 +13,7 @@ const minChange = (amount, coins, min=Infinity) => {
        let count = 1 + minChange(amount - coin, coins, min);
        if ( count < min && count > 0) min = count;
    }
+   memo[amount] = min;
    return min === Infinity ? -1 : min;
 };
 
