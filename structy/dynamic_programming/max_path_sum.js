@@ -5,10 +5,14 @@
 
 // You can assume that all numbers are non-negative.
 
-const maxPathSum = (grid, r, c) => {
+const maxPathSum = (grid, r=0, c=0, max=0) => {
     if (r === grid.length - 1 || c === grid[0].length - 1) return 0;
-
     if (r === grid.length - 1 && c === grid[0].length - 1) return grid[r][c];
+
+    let down = maxPathSum(grid, r + 1, c);
+    let right = maxPathSum(grid, r, c + 1);
+
+    let current = grid[r][c] + down + right;
 };
 
 const grid = [
@@ -16,4 +20,4 @@ const grid = [
   [5, 1, 1],
   [3, 6, 1],
 ];
-maxPathSum(grid); // -> 18
+console.log(maxPathSum(grid)); // -> 18
