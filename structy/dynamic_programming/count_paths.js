@@ -5,18 +5,21 @@
 // the bottom-right corner.
 
 const countPaths = (grid, row=0, col=0, count=0, memo={}) => {
-    if (`${row},${col}` in memo) return memo[`${row},${col}`];
+    let pos = `${row},${col}`;
+    if (pos in memo) return memo[pos];
+  
     if ( row >= grid.length) return 0;
     if ( col >= grid[0].length) return 0;
     if (grid[row][col] === "X") return 0;
+  
     if (row === grid.length - 1 && col === grid[0].length - 1) return 1;
+    
 
-    let right = countPaths(grid, row + 1, col, count, memo);
-    let down = countPaths(grid, row, col + 1, count, memo);
+    let right = countPaths(grid, row + 1, col, memo);
+    let down = countPaths(grid, row, col + 1, memo);
 
-    memo[`${row},${col}`] = right + down;
-    // return memo;
-    return memo[`${row},${col}`];
+    memo[pos] = right + down;
+    return memo[pos];
 };
 
 const grid = [
