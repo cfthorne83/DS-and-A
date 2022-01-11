@@ -5,19 +5,17 @@
 
 // You can assume that all numbers are non-negative.
 
-const maxPathSum = (grid, r=0, c=0, max=0, memo={}) => {
-    let pos = `{r,c}`;
+const maxPathSum = (grid, r=0, c=0, memo={}) => {
+    let pos = `${r},${c}`;
     if (pos in memo) return memo[pos];
     if (r === grid.length || c === grid[0].length) return 0;
     if (r === grid.length - 1 && c === grid[0].length - 1) return grid[r][c];
 
-    let down = maxPathSum(grid, r + 1, c, max, memo);
-    let right = maxPathSum(grid, r, c + 1, max, memo);
+    let down = maxPathSum(grid, r + 1, c, memo);
+    let right = maxPathSum(grid, r, c + 1, memo);
 
-    let current = grid[r][c] + Math.max(down, right);
-    if (current > max ) max = current;
-    memo[pos] = max;
-    return max;
+    memo[pos] = grid[r][c] + Math.max(down, right);
+    return memo[pos];
 };
 
 const grid = [
