@@ -13,7 +13,7 @@ const nonAdjacentSum = (nums) => {
         let maxSum = maxNeighborSum(num)
         if ( maxNeighborSum(num) > result ) result = maxSum;
     }
-    return result;
+    return result; 
 };
 
 const
