@@ -9,14 +9,24 @@ const nonAdjacentSum = (nums) => {
 //to and return that sum
 
     let result = -Infinity;
-    for (let num of nums){
-        let maxSum = maxNeighborSum(num)
-        if ( maxNeighborSum(num) > result ) result = maxSum;
+    for (let i in nums){
+        let maxSum = maxNeighborSum(i, nums)
+        if ( maxSum > result ) result = maxSum;
     }
     return result; 
 };
 
-const
+const maxNeighborSum = (idx, arr) => {
+    let filtered = [];
+
+    for (let i = 0; i < arr.length; i++){
+        if ( i !== (idx - 1) || i !== (idx + 1) || i !== idx){
+            filtered.push(arr[i]);
+        }
+    }
+    return arr[idx] +  Math.max(...filtered);
+}
 
 const nums = [2, 4, 5, 12, 7];
-nonAdjacentSum(nums); // -> 16
+// console.log(maxNeighborSum(0, nums))
+console.log(nonAdjacentSum(nums)); // -> 16
