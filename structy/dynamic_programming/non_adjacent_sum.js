@@ -9,7 +9,7 @@ const nonAdjacentSum = (nums) => {
 //to and return that sum
 
     let result = -Infinity;
-    for (let i in nums){
+    for (let i = 0; i < nums.length; i++){
         let maxSum = maxNeighborSum(i, nums)
         if ( maxSum > result ) result = maxSum;
     }
@@ -28,5 +28,6 @@ const maxNeighborSum = (idx, arr) => {
 }
 
 const nums = [2, 4, 5, 12, 7];
-console.log(maxNeighborSum(0, nums))
-// console.log(nonAdjacentSum(nums)); // -> 16
+// console.log(maxNeighborSum(4, nums))
+console.log(nonAdjacentSum(nums)); // -> 16
+memo = { '0': { '2': 7, '3': 14}}
