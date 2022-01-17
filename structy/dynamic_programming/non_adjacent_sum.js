@@ -4,28 +4,15 @@
 // as long as they are not adjacent.
 
 const nonAdjacentSum = (nums) => {
-//iterate through each num and, for each, return the sum of the num and the 
-//max nonadjecent neighbor. Keep a variable of the ultimate max sum to compare
-//to and return that sum
+    if (nums.length === 0) return 0;
 
-    let result = -Infinity;
-    for (let i = 0; i < nums.length; i++){
-        let maxSum = maxNeighborSum(i, nums)
-        if ( maxSum > result ) result = maxSum;
-    }
-    return result; 
+    let exclude = nonAdjacentSum(nums.slice(1));
+    let include = nums[0] + nonAdjacentSum(nums.slice(2));
+    
+    return Math.max(include, exclude);
 };
 
-const maxNeighborSum = (idx, arr) => {
-    let filtered = [];
 
-    for (let i = 0; i < arr.length; i++){
-        if ( i !== (idx - 1) && i !== (idx + 1) && i !== idx){
-            filtered.push(arr[i]);
-        }
-    }
-    return arr[idx] +  Math.max(...filtered);
-}
 
 const nums = [2, 4, 5, 12, 7];
 // console.log(maxNeighborSum(4, nums))
