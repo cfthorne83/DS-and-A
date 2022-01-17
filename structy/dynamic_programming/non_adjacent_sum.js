@@ -20,7 +20,7 @@ const maxNeighborSum = (idx, arr) => {
     let filtered = [];
 
     for (let i = 0; i < arr.length; i++){
-        if ( i !== (idx - 1) || i !== (idx + 1) || i !== idx){
+        if ( i !== (idx - 1) && i !== (idx + 1) && i !== idx){
             filtered.push(arr[i]);
         }
     }
@@ -28,5 +28,5 @@ const maxNeighborSum = (idx, arr) => {
 }
 
 const nums = [2, 4, 5, 12, 7];
-// console.log(maxNeighborSum(0, nums))
-console.log(nonAdjacentSum(nums)); // -> 16
+console.log(maxNeighborSum(0, nums))
+// console.log(nonAdjacentSum(nums)); // -> 16
