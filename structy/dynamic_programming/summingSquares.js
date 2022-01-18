@@ -1,0 +1,3 @@
+const summingSquares = (n) => {
+  // todo
+};
