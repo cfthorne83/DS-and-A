@@ -4,14 +4,17 @@
 // as long as they are not adjacent.
 
 // [2, 4] 
-const nonAdjacentSum = (nums, i=0) => {
+const nonAdjacentSum = (nums, i=0, memo={}) => {
+    if (i in memo) return memo[i];
     if (i >= nums.length) return 0;
 
-    let exclude = nonAdjacentSum(nums, i + 1); // 4
+    let exclude = nonAdjacentSum(nums, i + 1, memo); // 4
 
-    let include = nums[0] + nonAdjacentSum(nums, i + 2); // 2
+    let include = nums[i] + nonAdjacentSum(nums, i + 2, memo); // 2
     
-    return Math.max(include, exclude);
+    memo[i] = Math.max(include, exclude);
+    console.log(memo);
+    return memo[i];
 };
 
 
