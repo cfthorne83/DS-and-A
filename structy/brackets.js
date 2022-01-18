@@ -16,5 +16,5 @@ function SearchingChallenge(str) {
     return 0;
   }
 }
-let str = 
-SearchingChallenge()
+let str = "(coder)(byte))";
+console.log(SearchingChallenge(str))

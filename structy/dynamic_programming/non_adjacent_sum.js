@@ -3,12 +3,14 @@
 // in the array. There is no limit on how many elements can be taken into the sum 
 // as long as they are not adjacent.
 
+// [2, 4] 
 const nonAdjacentSum = (nums, i=0) => {
     if (i >= nums.length) return 0;
 
-    let exclude = nonAdjacentSum(nums, i + 1);
-    let include = nums[0] + nonAdjacentSum(nums, i + 2);
-    console.log([include, exclude])
+    let exclude = nonAdjacentSum(nums, i + 1); // 4
+
+    let include = nums[0] + nonAdjacentSum(nums, i + 2); // 2
+    
     return Math.max(include, exclude);
 };
 
