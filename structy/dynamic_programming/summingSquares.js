@@ -6,19 +6,23 @@
 
 
 
-const summingSquares = (n) => {
+const summingSquares = (n, min=Infinity) => {
     if (n === 0) return 0;
+    // if (n < 0) return Infinity;
     const squares = getSquares(n);
 
     for (let square of squares){
-        summingSquares(n - square)
+        // let summingSquares(n - square, min)//2 [1]
+        // // min = Math.min(count, min);
+        // min = count;
+        // console.log(count);
     }
-    // return 1 + 
+    // return min;
 };
 
 const getSquares = (n) => {
     let squares = [];
-    for (let num = 1; num < n ; num++){
+    for (let num = 1; num <= n ; num++){
         if (isSquare(num)) squares.push(num);
     }
     return squares;
@@ -31,4 +35,4 @@ const isSquare = (n) => {
     return false;
 }
 
-console.log(getSquares(12));
+console.log(getSquares(8));
