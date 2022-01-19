@@ -6,18 +6,20 @@
 
 
 
-const summingSquares = (n, min=Infinity) => {
+const summingSquares = (n, min=Infinity, memo={}) => {
+    if (n in memo) return memo[n];
     if (n === 0) return 0;
-    // if (n < 0) return Infinity;
+    if (n < 0) return Infinity;
+
     const squares = getSquares(n);
 
     for (let square of squares){
-        // let summingSquares(n - square, min)//2 [1]
-        // // min = Math.min(count, min);
-        // min = count;
-        // console.log(count);
+        let count = 1 + summingSquares(n - square, min, memo)
+        min = Math.min(count, min);
     }
-    // return min;
+    console.log(memo)
+    memo[n] = min;
+    return memo[n];
 };
 
 const getSquares = (n) => {
@@ -35,4 +37,4 @@ const isSquare = (n) => {
     return false;
 }
 
-console.log(getSquares(8));
+console.log(summingSquares(9));
