@@ -4,14 +4,16 @@
 
 // You may reuse a coin as many times as necessary.
 
-const countingChange = (amount, coins, ways=0, memo={}) => {
+const countingChange = (amount, coins, i=0, memo={}) => {
     if (amount === 0) return 1;
-    if (amount < 0) return 0;
-
-    for (let coin of coins){
-        ways += countingChange(amount - coin, coins, ways);
+    
+    const coin = coins[i];
+    let total = 0;
+    for (let qty = 0; qty * coin <= amount; qty++){
+        const remainder = amount - (qty * coin);
+        total += countingChange(remainder, coins, i + 1, memo);
     }
-    return ways;
+    return total;
 };
 
 console.log(countingChange(4, [1,2,3]))// -> 4
