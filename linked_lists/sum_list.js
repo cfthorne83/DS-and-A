@@ -21,8 +21,7 @@ class Node{
 const sumList = (head, sum=0) => {
     if (!head) return sum;
 
-    sum += head.val;
-    return sumList(head.next, sum);
+    return head.val + sumList(head.next, sum);
 }
 
 const a = new Node(2);
