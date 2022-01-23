@@ -9,12 +9,11 @@ class Node{
         this.next = null;
     }
 }
-const getNodeValue = (head, i, currentIdx=0) => {
+const getNodeValue = (head, i) => {
     if (!head) return null;
-    if (currentIdx === i) return head.val;
-    if (currentIdx > i) return null;
+    if (i === 0) return head.val;
 
-    return getNodeValue(head.next, i, currentIdx + 1)
+    return getNodeValue(head.next, i - 1);
 }
 
 const a = new Node("a");
