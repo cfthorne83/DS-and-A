@@ -4,11 +4,20 @@
 // position of the array. When situated at some position of the array, you may 
 // take a maximum number of steps based on the number at that position.
 
-const arrayStepper = (nums, i=0) => {
-    if (i >= nums.length) return true;
-    if (nums[i] === 0) return false;
+const arrayStepper = (nums, i=0, memo={}) => {
+    if (i in memo) return memo[i];
+    if (i === nums.length - 1){
+        memo[i] = true;
+        return true;
+    } 
 
-    return arrayStepper(nums, i + nums[i]);
+    const steps = nums[i];//4
+    for (let step = 1; step <= steps; step++){
+        if (arrayStepper(nums, i + step, memo) === true) return true;
+    }
+    memo[i] = false;
+    console.log(memo);
+    return false;
 }
 
-arrayStepper([2, 4, 2, 0, 0, 1]); // -> true
+console.log(arrayStepper([2, 4, 2, 0, 0, 1])); // -> true
