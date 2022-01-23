@@ -7,16 +7,22 @@ class Node{
         this.next = null;
     }
 }
-const sumList = (head) => {
-    let sum = 0;
+// const sumList = (head) => {
+//     let sum = 0;
 
-    let current = head;
+//     let current = head;
 
-    while(current){
-        sum += current.val;
-        current = current.next;
-    }
-    return sum;
+//     while(current){
+//         sum += current.val;
+//         current = current.next;
+//     }
+//     return sum;
+// }
+const sumList = (head, sum=0) => {
+    if (!head) return sum;
+
+    sum += head.val;
+    return sumList(head.next, sum);
 }
 
 const a = new Node(2);
@@ -32,4 +38,4 @@ d.next = e;
 
 // 2 -> 8 -> 3 -> -1 -> 7
 
-sumList(a); // 19
+console.log(sumList(a)); // 19
