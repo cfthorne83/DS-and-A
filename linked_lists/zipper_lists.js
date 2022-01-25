@@ -15,22 +15,35 @@ class Node{
     }
 }
 
-const zipperLists = (head1, head2) => {
-    let current1 = head1;//c
-    let current2 = head2;//2
+// const zipperLists = (head1, head2) => {
+//     let current1 = head1;//c
+//     let current2 = head2;//2
 
-    while (current1 && current2) {
-        let temp1 = current1.next;//c
-        let temp2 = current2.next;//2
+//     while (current1 && current2) {
+//         let temp1 = current1.next;//c
+//         let temp2 = current2.next;//2
 
-        if (current2) current1.next = current2;//a->1->b->2->c
-        if (temp1) current2.next = temp1;
+//         if (current2) current1.next = current2;//a->1->b->2->c
+//         if (temp1) current2.next = temp1;
 
-        current1 = temp1;
-        current2 = temp2;
-    }
+//         current1 = temp1;
+//         current2 = temp2;
+//     }
+//     return head1;
+// };
+
+const zipperLists = (head1, head2) => { //a, 1
+    if (!head1 || !head2) return head1;
+
+    const nextHead1 = head1.next;
+    const nextHead2 = head2.next;
+    if (head2) head1.next = head2;
+    if (nextHead1) head2.next = nextHead1;
+    zipperLists(nextHead1, nextHead2);
+    
     return head1;
 };
+
 // test_00:
 const a = new Node("a");
 const b = new Node("b");
@@ -46,5 +59,5 @@ x.next = y;
 y.next = z;
 // x -> y -> z
 
-zipperLists(a, x);
+console.log(zipperLists(a, x));
 // a -> x -> b -> y -> c -> z
