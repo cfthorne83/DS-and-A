@@ -15,19 +15,21 @@ class Node{
     }
 }
 
-const zipperList = (head1, head2) => {
+const zipperLists = (head1, head2) => {
+    let current1 = head1;//c
+    let current2 = head2;//2
 
-    let current = head1;//y
-    let temp = current.next;//c
-    let next = head2;//y
-    while (current) {
-        if (!current || !next) break;
-        temp = current.next;
-        current.next = next;//a->x->b->y
-        current = next;
-        next = temp;
+    while (current1 && current2) {
+        let temp1 = current1.next;//c
+        let temp2 = current2.next;//2
+
+        if (current2) current1.next = current2;//a->1->b->2->c
+        if (temp1) current2.next = temp1;
+
+        current1 = temp1;
+        current2 = temp2;
     }
-
+    return head1;
 };
 // test_00:
 const a = new Node("a");
