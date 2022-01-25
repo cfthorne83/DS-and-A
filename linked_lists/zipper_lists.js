@@ -14,6 +14,21 @@ class Node{
         this.next = null;
     }
 }
+
+const zipperList = (head1, head2) => {
+
+    let current = head1;//y
+    let temp = current.next;//c
+    let next = head2;//y
+    while (current) {
+        if (!current || !next) break;
+        temp = current.next;
+        current.next = next;//a->x->b->y
+        current = next;
+        next = temp;
+    }
+
+};
 // test_00:
 const a = new Node("a");
 const b = new Node("b");
