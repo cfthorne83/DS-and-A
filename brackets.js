@@ -31,12 +31,52 @@
 // })
 // .catch(error => console.log(error.message))
 
-var foo = 101;
-function func1() {
-  return function() {
-    console.log(foo)
-  }
-  var foo = 202;
+// var foo = 101;
+// function func1() {
+//   return function() {
+//     console.log(foo)
+//   }
+//   var foo = 202;
+// }
+// var func2 = func1();
+// func2();
+
+// function solution(number) {
+//     let count = 0;
+    
+    // for (let i1 = 0; i1 <= number.length; i1++){
+    //     for (let i2 = i1 + 1; i2 <= number.length; i2++){
+    //         let sub = number.substring(i1, i2);
+    //         let num = parseInt(sub);
+    //         if ((sub[0] === '0' && sub.length > 1)) continue;
+    //         // if (num % 3 === 0 && (sub[0] !== 0 && sub.length > 1)) count += 1;
+    //         if (num % 3 === 0) count++;
+    //         console.log([num, count])
+    //     }
+    // }
+    // return count;
+// };
+// function fullSquare(num) {
+//     for (let i = 1; i < num; i++){
+//         if ( i * i === num) return true;
+//     }
+//     return false;
+// }
+function solution(numbers) {
+    let count = 0;
+    
+    for (i1 = 0; i1 <= numbers.length; i1++){
+        for (i2 = i1 + 1; i2 <= numbers.length; i2++){
+            if (fullSquare(i1 + i2) && i1 <= i2) count ++;
+        }
+    }
+    return count;
 }
-var func2 = func1();
-func2();
+
+function fullSquare(num) {
+    for (let i = 1; i < num; i++){
+        if ( i * i === num) return true;
+    }
+    return false;
+}
+console.log(fullSquare(9));
