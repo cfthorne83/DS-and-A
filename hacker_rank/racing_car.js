@@ -1,16 +1,35 @@
-const minMoves = (obstacles, currentLane=2, count=0) => {
-    if (!obstacles.length) return 0;
-    if (obstacles[0] === currentLane) count++;
-    
-    let availLanes = [];
-    for (let i = 1; i <= 3; i++){
-        if (i !== obstacles[0]) availLanes.push(i);
+class Node{
+    constructor(lane){
+        this.lane = lane;
+        this.count = 0;
+        this.right = null;
+        this.left = null;
     }
-    
-    let right = minMoves(obstacles.slice(1), availLanes[0], count);
-    let left = minMoves(obstacles.slice(1), availLanes[1], count);
+}
 
-    return count + Math.min(right, left);
+const minMoves = (obstacles, currentLane=2, count=0) => {
+    
+    buildTree(currentLane, obstacles.length);
 };
-let arr = [2, 1, 3, 2];
-console.log(minMoves(arr))
+
+const buildTree = (rootVal, height) => {
+
+    for (let level = 1; level <= height; level++){
+        let lanes = [1, 2, 3];
+        lanes = lanes.splice(rootVal - 1, 1); 
+        let newNode = new Node(rootVal);
+        newNode.right = lanes[0];
+    }
+}
+console.log(buildTree(2, 3))
+let arr = [2, 1, 2];
+// console.log(minMoves(arr))
+//create an matrix
+//[0, 1, 0]
+//[1, 0, 0]
+//[0, 1, 0]
+//find all possible moves from that each position and return the min
+
+//OR
+//create a Node class and find all possible neighbors 
+//increment count if both children are diff than parent

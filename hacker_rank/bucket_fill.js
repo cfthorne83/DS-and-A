@@ -6,6 +6,7 @@ const strokesRequired = (strArr) => {
 
     for (let r = 0; r < pic.length; r++) {
         for (let c = 0; c < pic[0].length; c++){
+            let cell = pic[r][c];
             if (explore(r, c, pic, explored, cell)) count++;
         }
     }
@@ -39,7 +40,7 @@ const buildMatrix = (strArr) => {
 }
 
 const picture = ['aabba', 'aabba', 'aaacb'];
-const arr = buildMatrix(picture);
+// const arr = buildMatrix(picture);
 
-// console.log(strokesRequired(picture));
-console.log(explore(0, 0, arr, new Set(), 'a'))
+console.log(strokesRequired(picture));
+// console.log(explore(0, 0, arr, new Set(), 'a'))
