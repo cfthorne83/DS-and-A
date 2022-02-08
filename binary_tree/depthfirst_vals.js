@@ -8,12 +8,13 @@ class Node{
         this.left = null;
     }
 }
-const depthFirstValues = (root) => {
+const depthFirstValues = (root, vals=[]) => {
     if (!root) return [];
-    
-    let right = depthFirstValues(root.right);
-    let left = depthFirstValues(root.left);
-    return [root.val, ...right, ...left];
+
+    let left = depthFirstValues(root.left, vals);
+    let right = depthFirstValues(root.right, vals);
+
+    return [root.val, ...left, ...right];
 }
 
 const a = new Node('a');
