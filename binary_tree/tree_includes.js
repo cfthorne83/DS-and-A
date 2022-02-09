@@ -5,19 +5,19 @@
 class Node{
     constructor(val){
         this.val = val;
-        this.left = null;
         this.right = null;
+        this.left = null;
     }
 }
 
-const treeIncludes = (root, val) => {
+const treeIncludes = (root, target) => {
     if (!root) return false;
-    if (root.val === val) return true; 
+    if (root.val === target) return true;
 
-    let left = treeIncludes(root.left, val);
-    let right = treeIncludes(root.right, val);
+    let right = treeIncludes(root.right, target);
+    let left = treeIncludes(root.left, target);
 
-    return left || right;
+    return right || left;
 };
 
 const a = new Node("a");
