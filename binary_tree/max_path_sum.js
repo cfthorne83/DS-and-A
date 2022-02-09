@@ -11,14 +11,14 @@ class Node{
         this.left = null;
     }
 }
+
 const maxPathSum = root => {
-    if (!root) return -Infinity;
-    if (!root.left && !root.right) return root.val;
+    if (!root) return 0;
 
-    let right = maxPathSum(root.right);
     let left = maxPathSum(root.left);
+    let right = maxPathSum(root.right);
 
-    return root.val + Math.max(right, left);
+    return root.val + Math.max(left, right);
 };
 
 const a = new Node(3);
