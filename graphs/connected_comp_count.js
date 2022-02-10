@@ -1,33 +1,31 @@
-const connectedComponentsCount = (graph) => {
-    let visited = new Set();
-    let count = 0;
+// Write a function, connectedComponentsCount, that takes in the adjacency list 
+// of an undirected graph. The function should return the number of connected 
+// components within the graph.
 
-    for (let node in graph){
-        if (findAllPaths(node, graph, visited)){
-            count += 1;
+const connectedComponentsCount = (graph) => {
+    let count = 0;
+    let visited = new Set();
+
+    for (let node of Object.keys(graph)){
+        if (!visited.has(parseInt(node))){
+            console.log([node, visited])
+            if (explore(node, graph, visited)) count++;
         }
     }
     return count;
 };
 
-const findAllPaths = (root, graph, visited) => {
-    if ( visited.has(String(root))) return false;
-    let stack = [root];
+const explore = (node, graph, visited) => {
+    if (visited.has(node)) return false;
 
-    while (stack.length){
-        let current = stack.pop();
-        visited.add(String(current));
-
-        for (let neighbor of graph[current]){
-            if (!(visited.has(String(neighbor)))){
-                stack.push(neighbor);
-            }
+    visited.add(parseInt(node));
+    for (let edge of graph[node]){
+        if (!visited.has(edge)){
+            explore(edge, graph, visited);
         }
     }
     return true;
-    // return visited;
-}
-
+};
 
 const graph = {
     0: [8, 1, 5],
@@ -38,6 +36,5 @@ const graph = {
     3: [2, 4],
     4: [3, 2]
 };
-
-// console.log(findAllPaths(0, graph, new Set() ))
+// console.log(explore(0, graph, new Set()));
 console.log(connectedComponentsCount(graph))
