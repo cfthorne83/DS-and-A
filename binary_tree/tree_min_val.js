@@ -12,6 +12,15 @@ class Node{
     }
 }
 
+const treeMinValue = root => {
+    if (!root) return Infinity;
+
+    let left = treeMinValue(root.left);
+    let right = treeMinValue(root.right);
+
+    return Math.min(root.val, left, right )
+};
+
 const a = new Node(3);
 const b = new Node(11);
 const c = new Node(4);
