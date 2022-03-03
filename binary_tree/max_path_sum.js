@@ -13,7 +13,8 @@ class Node{
 }
 
 const maxPathSum = root => {
-    if (!root) return 0;
+    if (!root) return -Infinity;
+    if (!root.left && !root.right) return root.val;
 
     let left = maxPathSum(root.left);
     let right = maxPathSum(root.right);
