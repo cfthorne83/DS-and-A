@@ -10,11 +10,16 @@ class Node{
 }
 
 const breadthFirstValues = root => {
-    if (!root) return [];
+    let queue = [root];
+    let vals = [];
 
-    let left = breadthFirstValues(root.left); 
-    let right = breadthFirstValues(root.right); 
-    return [root.val, ...right, ...left];
+    while (queue.length){
+        const current = queue.shift();
+        vals.push(current.val);
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+    }
+    return vals;
 };
 
 const a = new Node('a');
