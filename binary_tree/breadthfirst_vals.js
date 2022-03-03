@@ -10,14 +10,14 @@ class Node{
 }
 
 const breadthFirstValues = root => {
-    let queue = [root];
+    let stack = [root];
     let vals = [];
 
-    while (queue.length){
-        const current = queue.shift();
+    while (stack.length){
+        let current = stack.pop();
         vals.push(current.val);
-        if (current.left) queue.push(current.left);
-        if (current.right) queue.push(current.right);
+        if (current.left) stack.push(current.left);
+        if (current.right) stack.push(current.right);
     }
     return vals;
 };

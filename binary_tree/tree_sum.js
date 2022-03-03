@@ -3,7 +3,7 @@
 // should return the total sum of all values in the tree.
 
 class Node{
-    constructor(val) {
+    constructor(val){
         this.val = val;
         this.right = null;
         this.left = null;
@@ -12,12 +12,13 @@ class Node{
 
 const treeSum = root => {
     if (!root) return 0;
-
-    let left = treeSum(root.right);
-    let right = treeSum(root.left);
+    
+    let left = treeSum(root.left);
+    let right = treeSum(root.right);
 
     return root.val + left + right;
 };
+
 const a = new Node(3);
 const b = new Node(11);
 const c = new Node(4);
