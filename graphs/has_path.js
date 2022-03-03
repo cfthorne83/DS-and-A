@@ -5,13 +5,9 @@
 
 const hasPath = (graph, src, dst) => {
   if (src === dst) return true;
-  let visited = new Set();
-  visited.add(src);
-
-  for (let node of graph[src]){
-    if (!visited.has(node)){
-      if(hasPath(graph, node, dst)) return true;
-    }
+  
+  for (let edge of graph[src]){
+    if (hasPath(graph, edge, dst)) return true;
   }
   return false;
 };
@@ -26,3 +22,4 @@ const graph = {
 };
 
 console.log(hasPath(graph, 'f', 'k')); // true
+// console.log(explore(graph, 'f', 'k', new Set()));
