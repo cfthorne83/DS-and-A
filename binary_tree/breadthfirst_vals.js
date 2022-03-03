@@ -8,20 +8,14 @@ class Node{
         this.right = null;
     }
 }
+
 const breadthFirstValues = root => {
     if (!root) return [];
-    let queue = [root];
-    let vals = [];
 
-    while (queue.length){
-        let current = queue.shift();
-        vals.push(current.val);
-
-        if (current.left) queue.push(current.left);
-        if (current.right) queue.push(current.right);
-    }
-    return vals;
-}
+    let left = breadthFirstValues(root.left); 
+    let right = breadthFirstValues(root.right); 
+    return [root.val, ...right, ...left];
+};
 
 const a = new Node('a');
 const b = new Node('b');
