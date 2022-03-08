@@ -4,21 +4,21 @@
 // of edges in the path, not the number of nodes. If there is no path between A 
 // and B, then return -1.
 
-const shortestPath = (edges, nodeA, nodeB) => {
+//build an ad list
+//
+const shortestPath = (graph, nodeA, nodeB) => {
+
 
 };
 
-const buildGraph = (edges) => {
-    let graph = {};
+const buildGraph = edges => {
+    const graph = {};
 
-    for (let edge of edges) {
+    for (let edge of edges){
         let [nodeA, nodeB] = edge;
-        if (!graph[nodeA]) graph[nodeA] = [];
-        if (!graph[nodeB]) graph[nodeB] = [];
-        graph[nodeA].push(nodeB);
-        graph[nodeB].push(nodeA);
+        if (!(nodeA in graph)) graph[nodeA] = [];
+        if (!(nodeB in graph)) graph[nodeB] = [];
     }
-    return graph;
 };
 const edges = [
     ['w', 'x'],

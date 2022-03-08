@@ -2,38 +2,44 @@
 // undirected graph. The function should return the size of the largest connected 
 // component in the graph.
 
+//est a var to keep track of the size of the largest connected comp
+//iterate through the nodes
+//explore all connected components of that node 
+    //depth first search of all neighbors while tracking the number of nodes visited
+    //return the number of nodes visited
+//keep track of visited nodes to prevent cycles
+
 const largestComponent = (graph) => {
     let visited = new Set();
     let largest = 0;
 
     for (let node in graph){
-        let nodeSize = explore(node, graph, visited)
-        if (nodeSize > largest){
-            largest = nodeSize;
-        }
+        let size = explore(graph, node, visited);
+        if (size > largest) largest = size;
     }
     return largest;
 };
 
-const explore  = (node, graph, visited) => {
-    if (visited.has(node)) return 0;
-    visited.add(node);
+const explore = (graph, node, visited) => {
+    if (visited.has(String(node))) return 0;
+    visited.add(String(node));
+
     let size = 1;
-    for (let neighbor of graph[node]){
-        size += explore(neighbor, graph, visited);
+    for(let neighbor of graph[node]){
+       size += explore(graph, neighbor, visited);
     }
-    console.log(visited);
     return size;
-};
+};  
 
 
 let graph = {
-    1: ['2'],
-    2: ['1', '8'],
-    6: ['7'],
-    9: ['8'],
-    7: ['6', '8'],
-    8: ['9', '7', '2']
+  0: ['8', '1', '5'],
+  1: ['0'],
+  5: ['0', '8'],
+  8: ['0', '5'],
+  2: ['3', '4'],
+  3: ['2', '4'],
+  4: ['3', '2']
 } // -> 6
-// console.log(largestComponent(graph))
-console.log(explore(1, graph, new Set()));
+console.log(largestComponent(graph))
+// console.log(explore(graph, 2, new Set()))
