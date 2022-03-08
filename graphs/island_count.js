@@ -3,40 +3,38 @@
 // number of islands on the grid.An island is a vertically or horizontally 
 // connected region of land.
 
-const islandCount = (grid) => {
+//iterate through each element in the matrix
+//add indices to a visited set
+//keep track of a count var
+//if the element is L and not in visited explore all adjacent neighbors and 
+//increment the count
+    //explore: depth first search to find all adjacent L elements
+//return the count
+
+const islandCount = grid => {
     let visited = new Set();
     let count = 0;
 
-
-    for (let row = 0; row < grid.length; row++){
-        for (let col = 0; col < grid[0].length; col++){
-
-            if (explore(row, col, grid, visited) === true){
-                count += 1;
-            } 
+    for (let r = 0; r < grid.length; r++){
+        for (let c = 0; c < grid[0].length; c++){
+            if (grid[r][c] === "L"){
+                if (explore(r, c, grid, visited)) count++;
+            }
         }
     }
-    return count;
+    return visited;
 };
 
-const explore = (row, col, grid, visited) => {
-    const rowInbounds = row > -1 && row < grid.length;
-    const colInbounds = col > -1 && col < grid[0].length;
+const explore = (r, c, grid, visited) => {
+    if (visited.has(`${r},${c}`)) return false;
+    if ( grid[r][c] === "W") return false;
+    visited.add(`${r},${c}`);
 
-    if (!rowInbounds || !colInbounds) return false;
-    if (visited.has(`${row},${col}`)) return false;
-    if (grid[row][col] === "W") return false;
-
-    visited.add(`${row},${col}`);
-
-    explore(row - 1, col, grid, visited);
-    explore(row + 1, col, grid, visited);
-    explore(row, col - 1, grid, visited);
-    explore(row, col + 1, grid, visited);
-    
-    return true;
+    explore(r + 1, c, grid, visited);
+    explore(r - 1, c, grid, visited);
+    explore(r, c + 1, grid, visited);
+    explore(r, c - 1, grid, visited);
 };
-
 
 
 const grid = [
