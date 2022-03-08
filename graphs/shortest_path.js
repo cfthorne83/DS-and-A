@@ -6,9 +6,26 @@
 
 //build an ad list
 //
-const shortestPath = (graph, nodeA, nodeB) => {
+const shortestPath = (edges, nodeA, nodeB) => {
+    const graph = buildGraph(edges);
+    const visited = new Set();
 
+    let queue = [[nodeA, 0]];
+    
 
+    while(queue.length){
+        let [current, dst] = queue.shift();
+        if (current === nodeB) return dst;
+        // console.log(current)
+        visited.add(current);
+        
+        for (let neighbor of graph[current]){
+            if (!visited.has(neighbor)){
+                queue.push([neighbor, dst + 1 ]);
+            }
+        }
+    }
+    return -1;
 };
 
 const buildGraph = edges => {
@@ -18,7 +35,11 @@ const buildGraph = edges => {
         let [nodeA, nodeB] = edge;
         if (!(nodeA in graph)) graph[nodeA] = [];
         if (!(nodeB in graph)) graph[nodeB] = [];
+
+        graph[nodeA].push(nodeB);
+        graph[nodeB].push(nodeA);
     }
+    return graph;
 };
 const edges = [
     ['w', 'x'],
@@ -27,5 +48,5 @@ const edges = [
     ['z', 'v'],
     ['w', 'v']
 ];
-// console.log(shortestPath(edges, 'w', 'z')); // -> 2
-console.log(buildGraph(edges))
+console.log(shortestPath(edges, 'w', 'z')); // -> 2
+// console.log(buildGraph(edges))
