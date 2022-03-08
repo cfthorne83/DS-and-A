@@ -2,31 +2,39 @@
 // undirected graph and two nodes (nodeA, nodeB). The function should return a 
 // boolean indicating whether or not there exists a path between nodeA and nodeB.
 
-const undirectedPath = (edges, nodeA, nodeB, visited=new Set()) => {
-    if (nodeA === nodeB) return true;
+//create and adjacency list
+//write a hasPath func
+
+const undirectedPath = (edges, nodeA, nodeB) => {
+    let visited = new Set();
     const graph = buildGraph(edges);
+    
+    if (explore(graph, visited, nodeA, nodeB)) return true;
+
+    return false;
+};
+
+const explore = (graph, visited, nodeA, nodeB) => {
+    if (visited.has(nodeA)) return false;
+    if (nodeA === nodeB) return true;
 
     visited.add(nodeA);
-    // console.log(nodeA);
+
     for (let neighbor of graph[nodeA]){
-        if (!visited.has(neighbor)){
-           if (undirectedPath(edges, neighbor, nodeB, visited)) return true;
-        }
+        if (explore(graph, visited, neighbor, nodeB)) return true;
     }
     return false;
-
 };
 
 const buildGraph = edges => {
-    let graph = {};
+    const graph = {};
 
-    for (let edge of edges){
-        let [node1, node2] = edge;
-        for (let node of edge){
-            if (!graph[node]) graph[node] = [];
-        }
-        graph[node1].push(node2)
-        graph[node2].push(node1)
+    for (let edge of edges) {
+        let [nodeA, nodeB] = edge;
+        if (!(nodeA in graph)) graph[nodeA] = [];
+        if (!(nodeB in graph)) graph[nodeB] = [];
+        graph[nodeA].push(nodeB);
+        graph[nodeB].push(nodeA);
     }
     return graph;
 };
