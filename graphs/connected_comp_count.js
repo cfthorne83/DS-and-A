@@ -2,28 +2,28 @@
 // of an undirected graph. The function should return the number of connected 
 // components within the graph.
 
-const connectedComponentsCount = (graph) => {
-    let count = 0;
-    let visited = new Set();
+//loop through each node in the list and explore all neighbors 
+//add each explored node to a set 
+//keep a count variable to track all connected components
 
-    for (let node of Object.keys(graph)){
-        if (!visited.has(parseInt(node))){
-            console.log([node, visited])
-            if (explore(node, graph, visited)) count++;
-        }
+const connectedComponentsCount = (graph) => {
+    let visited = new Set();
+    let count = 0;
+
+    for ( let node in graph){
+        if (explore(node, graph, visited)) count++;
     }
     return count;
 };
 
 const explore = (node, graph, visited) => {
-    if (visited.has(node)) return false;
+    if (visited.has(String(node))) return false;
+    visited.add(String(node));
 
-    visited.add(parseInt(node));
-    for (let edge of graph[node]){
-        if (!visited.has(edge)){
-            explore(edge, graph, visited);
-        }
+    for (let neighbor of graph[node]){
+        explore(neighbor, graph, visited);
     }
+    // console.log(visited);
     return true;
 };
 
