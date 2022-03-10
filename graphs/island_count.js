@@ -17,33 +17,34 @@ const islandCount = grid => {
 
     for (let r = 0; r < grid.length; r++){
         for (let c = 0; c < grid[0].length; c++){
-            if (grid[r][c] === "L"){
-                if (explore(r, c, grid, visited)) count++;
-            }
+            console.log([r, c])
+                // if (explore(r, c, grid, visited)) count++;
+                console.log(explore(r, c, grid, visited));
         }
     }
-    return visited;
+    return count;
 };
 
 const explore = (r, c, grid, visited) => {
-    if (visited.has(`${r},${c}`)) return false;
+    if (r < 0 || r > grid.length - 1 || c < 0 || c > grid[0].length - 1) return false;
     if ( grid[r][c] === "W") return false;
+    if (visited.has(`${r},${c}`)) return false;
     visited.add(`${r},${c}`);
 
     explore(r + 1, c, grid, visited);
     explore(r - 1, c, grid, visited);
     explore(r, c + 1, grid, visited);
     explore(r, c - 1, grid, visited);
+    return visited;
 };
 
 
 const grid = [
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'W', 'W', 'L', 'W'],
-    ['W', 'W', 'L', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['L', 'L', 'W', 'W', 'W'],
+  ['L', 'W', 'W', 'L', 'W'],
+  ['L', 'W', 'W', 'L', 'L'],
+  ['W', 'L', 'W', 'L', 'W'],
+  ['W', 'W', 'W', 'W', 'W'],
+  ['W', 'W', 'L', 'L', 'L'],
 ];
-// console.log(explore(3, 2, grid, new Set()))
-console.log(islandCount(grid));
+console.log(explore(0, 3, grid, new Set()))
+// console.log(islandCount(grid));
