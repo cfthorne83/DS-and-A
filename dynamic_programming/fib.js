@@ -1,10 +1,22 @@
+// Write a function fib that takes in a number argument, n, and returns the 
+// n-th number of the Fibonacci sequence.
+// The 0-th number of the sequence is 0.
+// The 1-st number of the sequence is 1.
+// To generate further numbers of the sequence, calculate the sum of previous 
+// two numbers.
+// Solve this recursively.
+
+//solve it without memoization, then factor in
 const fib = (n, memo={}) => {
-    if (memo[n]) return memo[n]
+    if (n in memo) return memo[n];
     if (n === 0) return 0;
     if (n === 1) return 1;
 
-    memo[n] = memo[n - 1] + memo[n - 2]
+
+    let result = fib(n - 1, memo) + fib(n - 2, memo);
+    memo[n] = result;
     return memo[n];
 };
 
-console.log(fib(3));
+console.log(fib(4));
+//[0, 1, 1, 2, 3, 5]
