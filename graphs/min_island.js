@@ -4,43 +4,57 @@
 // of land.
 // You may assume that the grid contains at least one island.
 
-const minimumIsland = (grid) => {
-    let visited = new Set();
+//iterate throught the matix
+//assign a variable to keep track of the smallest island
+//explore the neighbors of each L element
+    //conduct a depth first search to explore each adjacent index
+    //assign a var to track the number of adjacent elements
+    //return the size of the island explored
+// reassign the size var if smaller than the current
+
+const minimumIsland = grid => {
     let min = Infinity;
+    let visited = new Set();
 
     for (let r = 0; r < grid.length; r++){
         for (let c = 0; c < grid[0].length; c++){
-            let island = explore(r, c, visited, grid);
-            if ( (island < min) && (island > 0)) min = island;
+            let size = explore(r, c, grid, visited);
+            if (size < min) min = size;
+            // console.log([r,c])
         }
     }
     return min;
 };
 
-const explore = (r, c , visited, grid) => {
-    let rowInbounds = r < grid.length && r > -1;
-    let colInbounds = c < grid[0].length && c > -1;
-
-    if (!rowInbounds || !colInbounds) return 0;
-    if (visited.has(`${r},${c}`)) return 0;
-    if (grid[r][c] === "W") return 0;
+const explore = (r, c, grid, visited) => {
+    if (r < 0 || r > grid.length - 1 || c < 0 || c > grid[0].length - 1) return Infinity;
+    if (grid[r][c] === "W") return Infinity;
+    if (visited.has(`${r},${c}`)) return Infinity;
 
     visited.add(`${r},${c}`);
 
-    let left = explore(r - 1, c, visited, grid);
-    let right = explore(r + 1, c, visited, grid);
-    let down = explore(r, c - 1, visited, grid);
-    let up = explore(r, c + 1, visited, grid);
-    return 1 + left + right + down + up;
+    let size = 1;
+    let down = explore(r - 1, c, grid, visited);
+    let up = explore(r + 1, c, grid, visited);
+    let right = explore(r, c - 1, grid, visited);
+    let left = explore(r, c + 1, grid, visited);
+
+    let neighbors = [down, up, right, left];
+
+    for (let n of neighbors){
+        if (n !== Infinity) size += n;
+    }
+
+    return size;
 };
 
 const grid = [
-    ['L', 'W', 'W', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['W', 'L', 'W', 'L', 'W'],
-    ['W', 'W', 'W', 'W', 'W'],
-    ['W', 'W', 'L', 'L', 'L'],
+  ['W', 'W'],
+  ['L', 'L'],
+  ['W', 'W'],
+  ['W', 'L']
 ];
 
 console.log(minimumIsland(grid)); // -> 1
-// console.log(explore(0, 0, new Set(), grid));
+// console.log(explore(1, 0, grid, new Set()));
+
