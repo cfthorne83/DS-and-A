@@ -62,21 +62,48 @@
 //     }
 //     return false;
 // }
-function solution(numbers) {
-    let count = 0;
+// function solution(numbers) {
+//     let count = 0;
     
-    for (i1 = 0; i1 <= numbers.length; i1++){
-        for (i2 = i1 + 1; i2 <= numbers.length; i2++){
-            if (fullSquare(i1 + i2) && i1 <= i2) count ++;
-        }
-    }
-    return count;
-}
+//     for (i1 = 0; i1 <= numbers.length; i1++){
+//         for (i2 = i1 + 1; i2 <= numbers.length; i2++){
+//             if (fullSquare(i1 + i2) && i1 <= i2) count ++;
+//         }
+//     }
+//     return count;
+// }
 
-function fullSquare(num) {
-    for (let i = 1; i < num; i++){
-        if ( i * i === num) return true;
+// function fullSquare(num) {
+//     for (let i = 1; i < num; i++){
+//         if ( i * i === num) return true;
+//     }
+//     return false;
+// }
+// console.log(fullSquare(9));
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
     }
-    return false;
-}
-console.log(fullSquare(9));
+};
+
+const a = new Node('a'); // {val: 'a', left: null, right: null}
+const b = new Node('b');
+const c = new Node('c');
+const d = new Node('d');
+const e = new Node('e');
+const f = new Node('f');
+
+
+a.left = b;
+a.right = c; 
+b.left = d;
+b.right = e;
+c.right = f;
+
+const bottomRight = root => {
+    if (!root) return true;
+
+    bottomRight(root.right);
+};
