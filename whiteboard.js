@@ -106,4 +106,6 @@ const bottomRight = root => {
     if (!root) return true;
 
     bottomRight(root.right);
+
+    
 };
