@@ -10,18 +10,18 @@
 //if 0 is reached, return true
 //if not return false
 
-const sumPossible = (amt, arr, hash={}) => {
-    if (amt in hash) return hash[amt];
-    if (amt === 0 ) return true;
+const sumPossible = (amt, arr, memo={}) => {
+    if (amt in memo) return memo[amt];
+    if (amt === 0) return true;
     if (amt < 0) return false;
 
-    for (let num of arr) {
-        if (sumPossible(amt - num, arr, hash)){
-            hash[amt] = true;
+    for (let num of arr){
+        if (sumPossible(amt - num, arr)){
+            memo[amt] = true;
             return true;
         } 
     }
-    hash[amt] = false;
+    memo[amt] = false
     return false;
 };
 

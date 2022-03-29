@@ -4,22 +4,20 @@
 
 // If it is not possible to create the amount, then return -1.
 
-//keep track of a min variable
-//iterate through the array and subtract coin from amt, keeping track of how 
-//many tree levels have been traversed = if amt is 0 and the levels are less 
-//than the min var, replace the min var
-//return the min var
-//if amount is not found return -1
+// if amt === 0 and min is less than current min return min
+//iterate through the coins, subtract them from the amt and pass that new 
+// amt to minChange
 
-const minChange = (amt, coins, min=Infinity) => {
-    if (amt === 0) return min;
-    if (amt < 0) return -1;
+const minChange = (amt, coins, min=Infinity, memo={}) => {
+    if (amt in memo) return memo[amt];
+    if (amt === 0) return 0;
+    if (amt < 0) return Infinity;
 
     for (let coin of coins){
-        let count = 1 + minChange(amt - coin, coins, min);
-        if (count < min && count > 0) min = count;
+       let count = 1 + minChange(amt - coin, coins, min, memo);
+       min = Math.min(count, min);
     }
-    return min !== Infinity ? min : -1;
+    return min === Infinity ? -1 : min;
 };
 
 
