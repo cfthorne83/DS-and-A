@@ -14,17 +14,7 @@
 
 const maxPathSum = (grid, r=0, c=0, memo={}) => {
   const pos = r + ',' + c;
-  if (pos in memo) return memo[pos];
-  if (r >= grid.length || c >= grid[0].length) return 0;
-  if (r === grid.length - 1 && c === grid[0].length - 1) return grid[r][c];
-
-  const right = maxPathSum(grid, r + 1, c, memo);
-  const down = maxPathSum(grid, r, c + 1, memo);
-
-  const max = grid[r][c] + Math.max(right, down);
-  memo[pos] = max;
-  console.log(memo);
-  return memo[pos];
+  
 };
 
 const grid = [
