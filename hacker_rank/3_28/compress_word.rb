@@ -11,7 +11,11 @@ def compress_word(word, k)
         #set it to true when consecutive lett var reaches k
         #keep looping until it is false
     
-    
+    repeats = 1
+
+    (0...word.length).each do |i|
+        p i
+    end
 
 
 end
