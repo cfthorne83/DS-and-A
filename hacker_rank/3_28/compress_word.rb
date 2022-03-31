@@ -12,12 +12,34 @@ def compress_word(word, k)
         #keep looping until it is false
     
     repeats = 1
+    startIdx = nil
+    k_repeats = true
+    
+    while k_repeats 
+        k_repeats = false
+        
+        (1...word.length).each do |i|
+            if (word[i] == word[i-1])
+                repeats += 1
+                startIdx = startIdx || i - 1
 
-    (0...word.length).each do |i|
-        p i
+                if ((repeats >= k) && (word[i] != word[i+1]))
+                    word = word[0...startIdx] + word[i+1...word.length]
+                    k_repeats = true
+                    repeats = 1;
+                    startIdx = nil;
+                    break
+                end
+
+            else 
+                startIdx = nil
+                repeats = 1
+            end
+        end
     end
-
-
+    word
 end
-word = 'abbccb'
-p compress_word(word)
+
+# word = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffvvvvvvvv'
+# word = 'vvvvvvvv'
+p compress_word(word, 10)
